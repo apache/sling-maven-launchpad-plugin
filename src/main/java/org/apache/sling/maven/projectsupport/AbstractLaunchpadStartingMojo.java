@@ -20,6 +20,7 @@ import static org.apache.felix.framework.util.FelixConstants.LOG_LEVEL_PROP;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -178,7 +179,7 @@ public abstract class AbstractLaunchpadStartingMojo extends AbstractUsingBundleL
             if (propertiesFile.exists()) {
                 File tmp = null;
                 try {
-                    tmp = File.createTempFile("sling", "props");
+                    tmp = Files.createTempFile("sling", "props").toFile();
                     mavenFileFilter.copyFile(propertiesFile, tmp, true, project, Collections.EMPTY_LIST, true,
                             System.getProperty("file.encoding"), mavenSession);
                     Properties loadedProps = PropertyUtils.loadPropertyFile(tmp, null);

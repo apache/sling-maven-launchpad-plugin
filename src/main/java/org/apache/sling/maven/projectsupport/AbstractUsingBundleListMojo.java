@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -397,7 +398,7 @@ public abstract class AbstractUsingBundleListMojo extends AbstractBundleListMojo
         if (propsFile.exists()) {
             File tmp = null;
             try {
-                tmp = File.createTempFile("sling", "props");
+                tmp = Files.createTempFile("sling", "props").toFile();
                 mavenFileFilter.copyFile(propsFile, tmp, true, project, Collections.EMPTY_LIST, true,
                         System.getProperty("file.encoding"), mavenSession);
                 final Properties loadedProps = PropertyUtils.loadPropertyFile(tmp, null);
@@ -471,7 +472,7 @@ public abstract class AbstractUsingBundleListMojo extends AbstractBundleListMojo
             File tmp = null;
             Reader reader = null;
             try {
-                tmp = File.createTempFile("sling", "bootstrap");
+                tmp = Files.createTempFile("sling", "bootstrap").toFile();
                 mavenFileFilter.copyFile(bootstrapFile, tmp, true, project, Collections.EMPTY_LIST, true,
                         System.getProperty("file.encoding"), mavenSession);
                 reader = new FileReader(tmp);
